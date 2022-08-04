@@ -8,11 +8,12 @@ import closeFolderIcon from '../assets/images/closed-folder.png'
 type Props = {
   data: TreeData
   onCollapse: (key: string) => void
+  onCheck: (key: string) => void
 }
 
 export default class TreeNode extends Component<Props> {
   render() {
-    const { data: { key, name, children, type, collapsed }, onCollapse } = this.props
+    const { data: { key, name, children, type, collapsed = false, checked = false }, onCollapse, onCheck } = this.props
     let caret, icon;
     if (type === "file") {
       icon = fileIcon
@@ -29,6 +30,7 @@ export default class TreeNode extends Component<Props> {
         <div className='inner'>
           {caret}
           <span className='content'>
+            <input type="checkbox" checked={checked} onChange={() => { onCheck(key) }}/>
             <img src={icon} style={{ width: 20 }} />
             <span>{name}</span>
           </span>
@@ -38,7 +40,7 @@ export default class TreeNode extends Component<Props> {
             <div className='children'>
               {
                 children.map((item: TreeData) => (
-                  <TreeNode key={item.key} data={item} onCollapse={onCollapse}/>
+                  <TreeNode key={item.key} data={item} onCollapse={onCollapse} onCheck={onCheck}/>
                 ))
               }
             </div>
