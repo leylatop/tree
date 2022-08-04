@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "commonjs", 
+    "jsx": "react",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noImplicitAny": true,
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
+  },
+  "include": [
+    "./src/**/*",
+    "./typings/**/*"
+  ]
+}
+
+// target	转换成es5
+// module	代码规范
+// jsx	react模式会生成React.createElement，在使用前不需要再进行转换操作了，输出文件的扩展名为.js
+// outDir	指定输出目录
+// rootDir	指定根目录
+// sourceMap	把 ts 文件编译成 js 文件的时候，同时生成对应的sourceMap文件
+// noImplicitAny	如果为true的话，TypeScript 编译器无法推断出类型时，它仍然会生成 JS文件，但是它也会报告一个错误
+// esModuleInterop	是否转译common.js模块
+// include	需要编译的目录
