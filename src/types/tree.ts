@@ -6,4 +6,5 @@ export interface TreeData {
   children?: TreeData[]
   parent?: TreeData
   checked?: boolean
+  loading?: boolean
 }

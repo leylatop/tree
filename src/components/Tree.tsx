@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Children, Component } from 'react'
 import { TreeData } from '../types/tree'
 import TreeNode from './TreeNode'
+import { getChildren } from '../api'
 import './index.less'
 
 type Props = {
@@ -47,15 +48,35 @@ export default class Tree extends Component<Props, State> {
     })
   }
 
-  onCollapse = (key: string) => {
+  onCollapse = async (key: string) => {
     const data = this.keyToNodeMap[key]
+      // 1. 利用对象的引用地址特性更新data
+      // 2. 进而会更新到state.data
+      // 3. 然后setState，从而达到更新视图的目的
+    this.setState({ data: this.state.data })
     if(data) {
-      data.collapsed = !data.collapsed
-      data.children = data.children || []
-      // 利用对象的引用地址特性更新data，进而会更新到state.data，然后重新给state，从而达到更新视图的目的
-      console.log(this.state.data)
-      console.log(this.keyToNodeMap)
-      this.setState({ data: this.state.data });
+      const { children } = data
+      if(children) {
+        data.collapsed = !data.collapsed
+        this.setState({ data: this.state.data });
+      } else {
+        data.loading = true
+        this.setState({ data: this.state.data })
+        try {
+          const result = await getChildren(data)
+          if(result.code === 0) {
+            data.children = result.data
+            data.collapsed = false
+            data.loading = false
+            this.buildKeyMap()
+            this.setState({ data: this.state.data })
+          }
+        } catch (e) {
+          alert('请求数据出错')
+          data.loading = false
+          this.setState({ data: this.state.data })
+        }
+      }
     }
   }
 

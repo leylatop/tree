@@ -3,6 +3,7 @@ import { TreeData } from '../types/tree'
 import fileIcon from '../assets/images/file.png'
 import openFolderIcon from '../assets/images/opened-folder.png'
 import closeFolderIcon from '../assets/images/closed-folder.png'
+import loadingSrc from '../assets/images/loading.gif';
 
 
 type Props = {
@@ -13,12 +14,12 @@ type Props = {
 
 export default class TreeNode extends Component<Props> {
   render() {
-    const { data: { key, name, children, type, collapsed = false, checked = false }, onCollapse, onCheck } = this.props
+    const { data: { key, name, children, type, collapsed = false, checked = false, loading = false }, onCollapse, onCheck } = this.props
     let caret, icon;
     if (type === "file") {
       icon = fileIcon
     } else {
-      caret = (
+      caret = loading ? <img className="collapse" src={loadingSrc} style={{ width: 14, top: '50%', marginTop: -7 }}/> : (
         <span className={`collapse ${collapsed ? 'caret-right' : 'caret-down'}`}
           onClick={() => onCollapse(key)}
         />
