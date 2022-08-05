@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ES5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-    "module": "commonjs", 
+    "target": "ES5", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "commonjs",
     "jsx": "react",
     "outDir": "./dist",
     "rootDir": "./src",
     "noImplicitAny": true,
-    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
+    "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
   },
   "include": [
     "./src/**/*",
-    "./typings/**/*"
+    "./typings/**/*",
+    "mock-server/**/*"
   ]
 }
-
 // target	转换成es5
 // module	代码规范
 // jsx	react模式会生成React.createElement，在使用前不需要再进行转换操作了，输出文件的扩展名为.js
