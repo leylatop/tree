@@ -30,6 +30,12 @@ app.get('/getChildren', (req, res) => {
   }, 2000)
 
 });
+
+app.post('/write_log', (req, res) => {
+  let data = req.query;
+  console.log('---data', data)
+
+});
 app.listen(3000, () => {
   console.log(`接口服务器在${3000}上启动`);
 });
